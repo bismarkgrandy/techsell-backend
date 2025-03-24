@@ -28,11 +28,17 @@ const PORT=process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({
-    origin: "http://localhost:5173",
-    credentials: true
-}))
-
+// app.use(cors({
+//     origin: "http://localhost:5173",
+//     credentials: true
+// }))
+app.use(
+    cors({
+      origin: ["https://techsell-frontend.onrender.com"], // Allow frontend URL
+      methods: ["GET", "POST", "PUT", "PATCH", "DELETE"], // Include PATCH here
+      credentials: true, // Allow cookies and authentication headers
+    })
+  );
 
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
