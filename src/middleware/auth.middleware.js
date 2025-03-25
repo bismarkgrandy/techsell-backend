@@ -9,7 +9,7 @@ export const protectRoute = async(req, res, next) => {
             return res.status(401).json({message:"Unauthorized - no token available"});
         }
 
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const decoded = jwt.verify(token, process.env.JWT_secret);
 
         if(!decoded){
             return res.status(401).json({message:"Unauthorized - invalid token"});
@@ -38,7 +38,7 @@ export const protectAdminRoute = async (req, res, next) => {
     }
 
     // 2️⃣ Verify the token
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, process.env.JWT_secret);
 
     // 3️⃣ Find the user in the database
     const user = await User.findById(decoded.userId).select("-password");
